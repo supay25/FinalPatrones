@@ -16,7 +16,7 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setTitle("Inventarios");
+        this.setTitle("Inventarios breska");
        // rsscalelabel.RSScaleLabel.setScaleLabel(jl, "src/Imagenes/MenuFondo.png");
      
     }
