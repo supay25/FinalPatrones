@@ -190,7 +190,7 @@ public class Inventario extends javax.swing.JFrame {
         
             con = DriverManager.getConnection(URL,USUARIO,PASSWORD);
             smt= con.createStatement();
-            String sql = "INSERT INTO product" + "(code,price,marca,prenda)" + "VALUES(3,15,'adiddas','shirt')";
+            String sql = "INSERT INTO product" + "(code,price,marca,prenda)" + "VALUES(37,15,'adiddas','shirt')";
             smt.execute(sql);
         } catch (SQLException ex) {
             Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
