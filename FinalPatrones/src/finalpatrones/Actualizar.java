@@ -21,8 +21,8 @@ import javax.swing.JTextField;
 public class Actualizar extends javax.swing.JFrame {
     String DRIVER ="com.mysql.jdbc.Driver";
     String USUARIO="root";
-    String PASSWORD="oirflame";
-    String URL="jdbc:mysql://localhost:3306/FinalPatrones";
+    String PASSWORD="JOSMANU18";
+    String URL="jdbc:mysql://localhost:3306/Proyecto";
     Connection con = null;
     Statement smt = null;
 

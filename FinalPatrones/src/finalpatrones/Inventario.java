@@ -15,8 +15,8 @@ import javax.swing.table.DefaultTableModel;
 public class Inventario extends javax.swing.JFrame {
     String DRIVER ="com.mysql.jdbc.Driver";
     String USUARIO="root";
-    String PASSWORD="oirflame";
-    String URL="jdbc:mysql://localhost:3306/FinalPatrones";
+    String PASSWORD="JOSMANU18";
+    String URL="jdbc:mysql://localhost:3306/Proyecto";
     Connection con = null;
     Statement smt = null;
     
@@ -288,9 +288,9 @@ public class Inventario extends javax.swing.JFrame {
     String sql = "INSERT INTO producto VALUES (?, ?, ?, ?)";
     PreparedStatement psmt = con.prepareStatement(sql);
     psmt.setInt(1, codigoValue);
-    psmt.setInt(4, precioValue);
+    psmt.setInt(2, precioValue);
     psmt.setString(3, marca.getText());
-    psmt.setString(2, prenda.getText());
+    psmt.setString(4, prenda.getText());
     psmt.executeUpdate();
 
     DefaultTableModel model = (DefaultTableModel) tablaInventario.getModel();
