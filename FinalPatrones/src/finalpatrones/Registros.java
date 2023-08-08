@@ -24,8 +24,8 @@ public class Registros extends javax.swing.JFrame {
     
     String DRIVER ="com.mysql.jdbc.Driver";
     String USUARIO="root";
-    String PASSWORD="oirflame";
-    String URL="jdbc:mysql://localhost:3306/FinalPatrones";
+    String PASSWORD="JOSMANU18";
+    String URL="jdbc:mysql://localhost:3306/Proyecto";
     Connection con = null;
     Statement smt = null;
     
@@ -202,49 +202,54 @@ public class Registros extends javax.swing.JFrame {
     }//GEN-LAST:event_venderActionPerformed
 
     void anadirRegis(){
-    try {
-    // Validate if the codigo and precio fields contain valid integer values
-            int codigoFacValue = 0;
-            int codPrendaValue = 0;
-            int tarjetaValue = 0;
-
+    
             try {
-
-                codPrendaValue = Integer.parseInt(codPrenda.getText());
-                codigoFacValue = Integer.parseInt(codFactu.getText());
-                tarjetaValue = Integer.parseInt(datosTarjeta.getText());
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Codigo y Precio deben ser numeros enteros.");
-                return; // Exit the method if validation fails
+                
+                // Validate if the codigo and precio fields contain valid integer values
+                int codigoFacValue = 0;
+                int codPrendaValue = 0;
+                int tarjetaValue = 0;
+                
+                try {
+                    
+                    codPrendaValue = Integer.parseInt(codPrenda.getText());
+                    codigoFacValue = Integer.parseInt(codFactu.getText());
+                    tarjetaValue = Integer.parseInt(datosTarjeta.getText());
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Codigo y Precio deben ser numeros enteros.");
+                    return; // Exit the method if validation fails
+                }
+                
+                con = DriverManager.getConnection(URL, USUARIO, PASSWORD);
+                
+                // Check if the codigo is already present in the database
+                String checkSql = "SELECT cod_prenda FROM registros WHERE cod_prenda = ?";
+                PreparedStatement checkStatement = con.prepareStatement(checkSql);
+                checkStatement.setInt(1, codPrendaValue); // Use index 1 for the parameter
+                ResultSet resultSet = checkStatement.executeQuery();
+                
+                if (resultSet.next()) {
+                    JOptionPane.showMessageDialog(null, "Esta prenda ya esta vendida");
+                    return; // Exit the method if the codigo exists
+                }
+                
+                // Insert the data into the database
+                String sql = "INSERT INTO registros VALUES (?, ?, ?)";
+                PreparedStatement psmt = con.prepareStatement(sql);
+                psmt.setInt(1, codigoFacValue);
+                psmt.setInt(3, tarjetaValue);
+                psmt.setInt(2, codPrendaValue);
+                
+                psmt.executeUpdate();
+                
+                DefaultTableModel model = (DefaultTableModel) tablaVentas.getModel();
+                model.addRow(new Object[]{codFactu.getText(), datosTarjeta.getText(), codPrenda.getText()});
+                
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(Registros.class.getName()).log(Level.SEVERE,null, ex);
             }
-
-            con = DriverManager.getConnection(URL, USUARIO, PASSWORD);
-
-            // Check if the codigo is already present in the database
-            String checkSql = "SELECT codigo FROM registros WHERE cod_prenda = ?";
-            PreparedStatement checkStatement = con.prepareStatement(checkSql);
-            checkStatement.setInt(1, codPrendaValue); // Use index 1 for the parameter
-            ResultSet resultSet = checkStatement.executeQuery();
-
-            if (resultSet.next()) {
-                JOptionPane.showMessageDialog(null, "Esta prenda ya esta vendida");
-                return; // Exit the method if the codigo exists
-            }
-
-            // Insert the data into the database
-            String sql = "INSERT INTO registros VALUES (?, ?, ?)";
-            PreparedStatement psmt = con.prepareStatement(sql);
-            psmt.setInt(1, codigoFacValue);
-            psmt.setInt(2, tarjetaValue);
-            psmt.setInt(3, codPrendaValue);
-
-            psmt.executeUpdate();
-
-            DefaultTableModel model = (DefaultTableModel) tablaVentas.getModel();
-            model.addRow(new Object[]{codFactu.getText(), datosTarjeta.getText(), codPrenda.getText()});
-        } catch (SQLException ex) {
-            Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
 
 }
     
@@ -258,14 +263,14 @@ public class Registros extends javax.swing.JFrame {
           
           Statement s = con.createStatement();
           
-          ResultSet rs = s.executeQuery("SELECT * from producto");
+          ResultSet rs = s.executeQuery("SELECT * from registros");
           
           while(rs.next()){
-            String precioo = String.valueOf(rs.getString("precio"));
-            String marca = rs.getString("marca");
-            String cod = String.valueOf(rs.getString("codigo"));
-            String prenda = rs.getString("prenda");     
-            String jdata[] = {prenda,marca,cod,precioo};
+            String fac = String.valueOf(rs.getString("codigoFac"));
+            String tarjeta = rs.getString("tarjeta");
+            String cod_prenda = String.valueOf(rs.getString("cod_prenda"));
+               
+            String jdata[] = {fac,tarjeta,cod_prenda};
             model.addRow(jdata);
              
           }
