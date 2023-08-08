@@ -4,6 +4,7 @@ package finalpatrones;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -55,6 +56,7 @@ public class Inventario extends javax.swing.JFrame {
         btnUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 442));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -129,10 +131,7 @@ public class Inventario extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(btnAnadir))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -150,74 +149,71 @@ public class Inventario extends javax.swing.JFrame {
                                 .addComponent(lblPrenda))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(regresarInve)
-                                .addGap(79, 79, 79)))))
+                                .addGap(79, 79, 79))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(btnAnadir)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(btnUpdate)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
                 .addGap(107, 107, 107))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(169, 169, 169)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnUpdate)
-                .addGap(47, 47, 47)
-                .addComponent(jButton1)
-                .addGap(199, 199, 199))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(regresarInve))
-                        .addGap(23, 23, 23)
-                        .addComponent(lblPrenda)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(prenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(lblMarca)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(lblCod)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPrecio)
-                        .addGap(3, 3, 3)
-                        .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16)))
+                    .addComponent(jLabel1)
+                    .addComponent(regresarInve))
+                .addGap(23, 23, 23)
+                .addComponent(lblPrenda)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(prenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(lblMarca)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(lblCod)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblPrecio)
+                .addGap(3, 3, 3)
+                .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnAnadir)
-                .addGap(5, 5, 5)
+                .addContainerGap(99, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(btnUpdate))
-                .addGap(51, 51, 51))
+                    .addComponent(btnUpdate)
+                    .addComponent(jButton1))
+                .addGap(77, 77, 77))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(306, 306, 306))
+                .addGap(0, 312, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -234,8 +230,14 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_regresarInveActionPerformed
 
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
-
-            anadir(); 
+        if( prenda.getText().equals("")|| marca.getText().equals("")|| precio.getText().equals("")||codigo.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"Hay campos vacios");
+        }                                                
+        else{
+             anadir(); 
+        }
+            
+           
            
             
     }//GEN-LAST:event_btnAnadirActionPerformed
@@ -248,47 +250,54 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        try {
-            // TODO add your handling code here:
-            con = DriverManager.getConnection(URL,USUARIO,PASSWORD);
-            String id = tablaInventario.getValueAt(tablaInventario.getSelectedRow(),0).toString();
-            Actualizar(prenda, marca,precio,id);
-        } catch (SQLException ex) {
-            Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.setVisible(false);
+        Update m = new Update();
+        m.setVisible(true);
         
     }//GEN-LAST:event_btnUpdateActionPerformed
-    public void Actualizar(JTextField prenda,JTextField marca,JTextField precio,String id){
-        try {
-            String sql = "update product set  prenda =  '" +prenda.getText() +"', marca = '" +marca.getText() +"', price = '"+ Integer.parseInt(precio.getText())+ "', where code = " + id;
-            Statement st;
-            con = DriverManager.getConnection(URL,USUARIO,PASSWORD);
-            st = con.createStatement();
-            int rs =st.executeUpdate(sql);
-        } catch (SQLException ex) {
-            Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
+   
     void anadir(){
         
     try {
-            // TODO add your handling code here:
-        
-            con = DriverManager.getConnection(URL,USUARIO,PASSWORD);           
-            String sql = "Insert into product values(?,?,?,?)";
-            PreparedStatement psmt = con.prepareStatement(sql);
-            psmt.setInt(1,Integer.parseInt(codigo.getText()));
-            psmt.setInt(2, Integer.parseInt(precio.getText()));
-            psmt.setString(3, marca.getText());
-            psmt.setString(4, prenda.getText());
-            psmt.executeUpdate();
-            DefaultTableModel model = (DefaultTableModel)tablaInventario.getModel();
-            model.addRow(new Object[]{prenda.getText(),marca.getText(),codigo.getText(),precio.getText()});
-            //smt.execute(sql);
-        } catch (SQLException ex) {
-            Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    // Validate if the codigo and precio fields contain valid integer values
+    int codigoValue = 0;
+    int precioValue = 0;
+
+    try {
+        codigoValue = Integer.parseInt(codigo.getText());
+        precioValue = Integer.parseInt(precio.getText());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Codigo y Precio deben ser numeros enteros.");
+        return; // Exit the method if validation fails
+    }
+
+    con = DriverManager.getConnection(URL, USUARIO, PASSWORD);
+    
+    // Check if the codigo is already present in the database
+    String checkSql = "SELECT code FROM product WHERE code = ?";
+    PreparedStatement checkStatement = con.prepareStatement(checkSql);
+    checkStatement.setInt(1, codigoValue);
+    ResultSet resultSet = checkStatement.executeQuery();
+    
+    if (resultSet.next()) {
+        JOptionPane.showMessageDialog(null, "Ingrese un codigo diferente.");
+        return; // Exit the method if the codigo exists
+    }
+    
+    // Insert the data into the database
+    String sql = "INSERT INTO product VALUES (?, ?, ?, ?)";
+    PreparedStatement psmt = con.prepareStatement(sql);
+    psmt.setInt(1, codigoValue);
+    psmt.setInt(2, precioValue);
+    psmt.setString(3, marca.getText());
+    psmt.setString(4, prenda.getText());
+    psmt.executeUpdate();
+
+    DefaultTableModel model = (DefaultTableModel) tablaInventario.getModel();
+    model.addRow(new Object[]{prenda.getText(), marca.getText(), codigo.getText(), precio.getText()});
+} catch (SQLException ex) {
+    Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
+}
 }
  
     private void TableDatos()  {

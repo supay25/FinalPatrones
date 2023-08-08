@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -125,9 +126,9 @@ public class Eliminar extends javax.swing.JFrame {
                 int rowsAffected = preparedStatement.executeUpdate();
                 
                 if (rowsAffected > 0) {
-                    System.out.println("User with ID " + code + " deleted successfully.");
+                    JOptionPane.showMessageDialog(null,"User with ID " + code + " deleted successfully.");
                 } else {
-                    System.out.println("No user with ID " + code + " found to delete.");
+                    JOptionPane.showMessageDialog(null,"No user with ID " + code + " found to delete.");
                 }
             }
         } catch (SQLException ex) {
