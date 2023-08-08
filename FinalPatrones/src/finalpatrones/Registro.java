@@ -9,9 +9,9 @@ public class Registro extends Producto {
     int Factura;
     
     
-    public Registro( int Factura, String Prenda, String Marca, int Codigo, float Precio, boolean Estado){
+    public Registro( int Factura, String Prenda, String Marca, int Codigo, float Precio){
        
-       super(Prenda, Marca, Codigo, Precio, Estado);
+       super(Prenda, Marca, Codigo, Precio);
        this.Factura=Factura;
        
    }

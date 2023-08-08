@@ -13,15 +13,15 @@ public class Producto {
     String Marca;
     int Codigo;
     float Precio;
-    boolean Estado;
     
-     public Producto(String Prenda, String Marca, int Codigo, float Precio, boolean Estado) {
+    
+     public Producto(String Prenda, String Marca, int Codigo, float Precio) {
    		 
         this.Prenda=Prenda;
         this.Marca=Marca;
         this.Codigo=Codigo;
         this.Precio=Precio;
-        this.Estado=Estado;
+        
      }  
      
      
@@ -37,8 +37,6 @@ public class Producto {
     public float getPrecio(){
         return Precio;
     }
-    public boolean getEstado(){
-        return Estado;
-    }
+    
     
 }

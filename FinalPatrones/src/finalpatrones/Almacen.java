@@ -13,9 +13,9 @@ public class Almacen extends Producto {
     int Cantidad;
     int Sector;
     
-    public Almacen(int Cantidad, String Prenda, String Marca, int Codigo, float Precio, boolean Estado){
+    public Almacen(int Cantidad, String Prenda, String Marca, int Codigo, float Precio){
         
-       super(Prenda, Marca, Codigo, Precio, Estado);
+       super(Prenda, Marca, Codigo, Precio);
        this.Cantidad=Cantidad;
        this.Sector=Sector;
         
