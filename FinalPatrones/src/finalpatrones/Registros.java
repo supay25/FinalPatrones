@@ -4,19 +4,39 @@
  */
 package finalpatrones;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author luisd
  */
 public class Registros extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Registros
-     */
+    
+    
+    String DRIVER ="com.mysql.jdbc.Driver";
+    String USUARIO="root";
+    String PASSWORD="oirflame";
+    String URL="jdbc:mysql://localhost:3306/FinalPatrones";
+    Connection con = null;
+    Statement smt = null;
+    
+    
+    
+    
     public Registros() {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        TableDatos();
     }
 
     /**
@@ -31,6 +51,15 @@ public class Registros extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         regresarRegi = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        codPrenda = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaVentas = new javax.swing.JTable();
+        vender = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        codFactu = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        datosTarjeta = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,26 +76,91 @@ public class Registros extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Ingrese codigo de prenda");
+
+        codPrenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codPrendaActionPerformed(evt);
+            }
+        });
+
+        tablaVentas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo Factura", "Tarjeta", "Codigo Prenda"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaVentas);
+
+        vender.setText("Vender");
+        vender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                venderActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Ingrese codigo de factura");
+
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Ingrese ultimos 4 digitos");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(regresarRegi)
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(72, 72, 72))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(regresarRegi)
-                        .addContainerGap())))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(codFactu, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                            .addComponent(codPrenda)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(vender)
+                                .addComponent(jLabel4))
+                            .addComponent(datosTarjeta, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(49, 49, 49)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 16, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 309, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1)
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(codPrenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(codFactu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(datosTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(vender))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(regresarRegi)
                 .addContainerGap())
         );
@@ -91,9 +185,100 @@ public class Registros extends javax.swing.JFrame {
         m.setVisible(true);
     }//GEN-LAST:event_regresarRegiActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void codPrendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codPrendaActionPerformed
+        
+    }//GEN-LAST:event_codPrendaActionPerformed
+
+    
+    
+    
+    
+    private void venderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_venderActionPerformed
+    
+           anadirRegis();
+        
+        
+        
+    }//GEN-LAST:event_venderActionPerformed
+
+    void anadirRegis(){
+    try {
+    // Validate if the codigo and precio fields contain valid integer values
+            int codigoFacValue = 0;
+            int codPrendaValue = 0;
+            int tarjetaValue = 0;
+
+            try {
+
+                codPrendaValue = Integer.parseInt(codPrenda.getText());
+                codigoFacValue = Integer.parseInt(codFactu.getText());
+                tarjetaValue = Integer.parseInt(datosTarjeta.getText());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Codigo y Precio deben ser numeros enteros.");
+                return; // Exit the method if validation fails
+            }
+
+            con = DriverManager.getConnection(URL, USUARIO, PASSWORD);
+
+            // Check if the codigo is already present in the database
+            String checkSql = "SELECT codigo FROM registros WHERE cod_prenda = ?";
+            PreparedStatement checkStatement = con.prepareStatement(checkSql);
+            checkStatement.setInt(1, codPrendaValue); // Use index 1 for the parameter
+            ResultSet resultSet = checkStatement.executeQuery();
+
+            if (resultSet.next()) {
+                JOptionPane.showMessageDialog(null, "Esta prenda ya esta vendida");
+                return; // Exit the method if the codigo exists
+            }
+
+            // Insert the data into the database
+            String sql = "INSERT INTO registros VALUES (?, ?, ?)";
+            PreparedStatement psmt = con.prepareStatement(sql);
+            psmt.setInt(1, codigoFacValue);
+            psmt.setInt(2, tarjetaValue);
+            psmt.setInt(3, codPrendaValue);
+
+            psmt.executeUpdate();
+
+            DefaultTableModel model = (DefaultTableModel) tablaVentas.getModel();
+            model.addRow(new Object[]{codFactu.getText(), datosTarjeta.getText(), codPrenda.getText()});
+        } catch (SQLException ex) {
+            Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+}
+    
+ private void TableDatos()  {
+        try{
+          con = DriverManager.getConnection(URL,USUARIO,PASSWORD);
+          DefaultTableModel model = (DefaultTableModel)tablaVentas.getModel();   
+          //model.setRowCount(0);
+          
+    
+          
+          Statement s = con.createStatement();
+          
+          ResultSet rs = s.executeQuery("SELECT * from producto");
+          
+          while(rs.next()){
+            String precioo = String.valueOf(rs.getString("precio"));
+            String marca = rs.getString("marca");
+            String cod = String.valueOf(rs.getString("codigo"));
+            String prenda = rs.getString("prenda");     
+            String jdata[] = {prenda,marca,cod,precioo};
+            model.addRow(jdata);
+             
+          }
+          
+          
+         con.close();
+         
+        }catch (Exception e){
+            System.out.print(e.getMessage());
+        }
+}
+        
+        
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -127,8 +312,17 @@ public class Registros extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField codFactu;
+    public javax.swing.JTextField codPrenda;
+    private javax.swing.JTextField datosTarjeta;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton regresarRegi;
+    private javax.swing.JTable tablaVentas;
+    private javax.swing.JButton vender;
     // End of variables declaration//GEN-END:variables
 }

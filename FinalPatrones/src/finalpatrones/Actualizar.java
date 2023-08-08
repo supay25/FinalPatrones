@@ -18,18 +18,18 @@ import javax.swing.JTextField;
  *
  * @author Jose
  */
-public class Update extends javax.swing.JFrame {
+public class Actualizar extends javax.swing.JFrame {
     String DRIVER ="com.mysql.jdbc.Driver";
     String USUARIO="root";
-    String PASSWORD="JOSMANU18";
-    String URL="jdbc:mysql://localhost:3306/Proyecto";
+    String PASSWORD="oirflame";
+    String URL="jdbc:mysql://localhost:3306/FinalPatrones";
     Connection con = null;
     Statement smt = null;
 
     /**
      * Creates new form Update
      */
-    public Update() {
+    public Actualizar() {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -158,7 +158,7 @@ public class Update extends javax.swing.JFrame {
        
             
         try {
-    String sql = "update product set prenda = '" + prenda.getText() + "', marca = '" + marca.getText() + "', price = '" + Integer.parseInt(precio.getText()) + "' where code = " + id;
+    String sql = "update producto set prenda = '" + prenda.getText() + "', marca = '" + marca.getText() + "', precio = '" + Integer.parseInt(precio.getText()) + "' where codigo = " + id;
     Statement st;
     con = DriverManager.getConnection(URL, USUARIO, PASSWORD);
     st = con.createStatement();
@@ -170,18 +170,18 @@ public class Update extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "No se encontro ningun producto");
     }
 } catch (SQLException ex) {
-    JOptionPane.showMessageDialog(null, "Occurrio un error al actualizar");
-    Logger.getLogger(Update.class.getName()).log(Level.SEVERE, null, ex);
+    JOptionPane.showMessageDialog(null, "Error al actualizar");
+    Logger.getLogger(Actualizar.class.getName()).log(Level.SEVERE, null, ex);
 } catch (NumberFormatException ex) {
     JOptionPane.showMessageDialog(null, "Precio invalido");
-    Logger.getLogger(Update.class.getName()).log(Level.SEVERE, null, ex);
+    Logger.getLogger(Actualizar.class.getName()).log(Level.SEVERE, null, ex);
 } finally {
     try {
         if (con != null) {
             con.close();
         }
     } catch (SQLException ex) {
-        Logger.getLogger(Update.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(Actualizar.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
 
@@ -209,20 +209,21 @@ public class Update extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Update.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Actualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Update.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Actualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Update.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Actualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Update.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Actualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Update().setVisible(true);
+                new Actualizar().setVisible(true);
             }
         });
     }

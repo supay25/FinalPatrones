@@ -15,8 +15,8 @@ import javax.swing.table.DefaultTableModel;
 public class Inventario extends javax.swing.JFrame {
     String DRIVER ="com.mysql.jdbc.Driver";
     String USUARIO="root";
-    String PASSWORD="JOSMANU18";
-    String URL="jdbc:mysql://localhost:3306/Proyecto";
+    String PASSWORD="oirflame";
+    String URL="jdbc:mysql://localhost:3306/FinalPatrones";
     Connection con = null;
     Statement smt = null;
     
@@ -251,7 +251,7 @@ public class Inventario extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         this.setVisible(false);
-        Update m = new Update();
+        Actualizar m = new Actualizar();
         m.setVisible(true);
         
     }//GEN-LAST:event_btnUpdateActionPerformed
@@ -274,7 +274,7 @@ public class Inventario extends javax.swing.JFrame {
     con = DriverManager.getConnection(URL, USUARIO, PASSWORD);
     
     // Check if the codigo is already present in the database
-    String checkSql = "SELECT code FROM product WHERE code = ?";
+    String checkSql = "SELECT codigo FROM producto WHERE codigo = ?";
     PreparedStatement checkStatement = con.prepareStatement(checkSql);
     checkStatement.setInt(1, codigoValue);
     ResultSet resultSet = checkStatement.executeQuery();
@@ -285,12 +285,12 @@ public class Inventario extends javax.swing.JFrame {
     }
     
     // Insert the data into the database
-    String sql = "INSERT INTO product VALUES (?, ?, ?, ?)";
+    String sql = "INSERT INTO producto VALUES (?, ?, ?, ?)";
     PreparedStatement psmt = con.prepareStatement(sql);
     psmt.setInt(1, codigoValue);
-    psmt.setInt(2, precioValue);
+    psmt.setInt(4, precioValue);
     psmt.setString(3, marca.getText());
-    psmt.setString(4, prenda.getText());
+    psmt.setString(2, prenda.getText());
     psmt.executeUpdate();
 
     DefaultTableModel model = (DefaultTableModel) tablaInventario.getModel();
@@ -310,14 +310,13 @@ public class Inventario extends javax.swing.JFrame {
           
           Statement s = con.createStatement();
           
-          ResultSet rs = s.executeQuery("SELECT * from product");
+          ResultSet rs = s.executeQuery("SELECT * from producto");
           
           while(rs.next()){
-            String precioo = String.valueOf(rs.getString("price"));
+            String precioo = String.valueOf(rs.getString("precio"));
             String marca = rs.getString("marca");
-            String cod = String.valueOf(rs.getString("code"));
+            String cod = String.valueOf(rs.getString("codigo"));
             String prenda = rs.getString("prenda");     
-            System.out.print(precioo);
             String jdata[] = {prenda,marca,cod,precioo};
             model.addRow(jdata);
              

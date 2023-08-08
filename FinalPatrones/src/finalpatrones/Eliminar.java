@@ -20,8 +20,8 @@ import javax.swing.JOptionPane;
 public class Eliminar extends javax.swing.JFrame {
     String DRIVER ="com.mysql.jdbc.Driver";
     String USUARIO="root";
-    String PASSWORD="JOSMANU18";
-    String URL="jdbc:mysql://localhost:3306/Proyecto";
+    String PASSWORD="oirflame";
+    String URL="jdbc:mysql://localhost:3306/FinalPatrones";
     Connection con = null;
     Statement smt = null;
 
@@ -118,7 +118,7 @@ public class Eliminar extends javax.swing.JFrame {
     void eliminar(){
         try {
             con = DriverManager.getConnection(URL,USUARIO,PASSWORD);
-            String deleteQuery = "DELETE FROM product WHERE code = ?";
+            String deleteQuery = "DELETE FROM producto WHERE codigo = ?";
             String code = txtEliminar.getText();
              try (PreparedStatement preparedStatement = con.prepareStatement(deleteQuery)) {
                 preparedStatement.setInt(1, Integer.parseInt(code));
@@ -126,9 +126,9 @@ public class Eliminar extends javax.swing.JFrame {
                 int rowsAffected = preparedStatement.executeUpdate();
                 
                 if (rowsAffected > 0) {
-                    JOptionPane.showMessageDialog(null,"User with ID " + code + " deleted successfully.");
+                    JOptionPane.showMessageDialog(null,"Producto " + code + " fue eliminado.");
                 } else {
-                    JOptionPane.showMessageDialog(null,"No user with ID " + code + " found to delete.");
+                    JOptionPane.showMessageDialog(null,"No existe el codigo " + code);
                 }
             }
         } catch (SQLException ex) {
