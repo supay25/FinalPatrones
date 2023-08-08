@@ -143,8 +143,14 @@ public class Actualizar extends javax.swing.JFrame {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
-        int cod = Integer.parseInt(codigo.getText());
-        Actualizar(cod);
+        if( prenda.getText().equals("")|| marca.getText().equals("")|| precio.getText().equals("")||codigo.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"Hay campos vacios");
+        }                                                
+        else{
+            int cod = Integer.parseInt(codigo.getText());
+            Actualizar(cod);
+        }
+        
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -173,7 +179,7 @@ public class Actualizar extends javax.swing.JFrame {
     JOptionPane.showMessageDialog(null, "Error al actualizar");
     Logger.getLogger(Actualizar.class.getName()).log(Level.SEVERE, null, ex);
 } catch (NumberFormatException ex) {
-    JOptionPane.showMessageDialog(null, "Precio invalido");
+    JOptionPane.showMessageDialog(null, "Codigo invalido");
     Logger.getLogger(Actualizar.class.getName()).log(Level.SEVERE, null, ex);
 } finally {
     try {
